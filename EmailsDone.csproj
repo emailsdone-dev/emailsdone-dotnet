@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <PackageId>EmailsDone</PackageId>
+    <Version>0.1.1</Version>
+    <Authors>EmailsDone</Authors>
+    <Company>EmailsDone</Company>
+    <Description>Template-first transactional email SDK for EmailsDone.</Description>
+    <PackageTags>emailsdone;email;transactional-email;sdk</PackageTags>
+    <PackageProjectUrl>https://emailsdone.dev/docs/libraries/dotnet/</PackageProjectUrl>
+    <RepositoryUrl>https://emailsdone.dev</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+</Project>
