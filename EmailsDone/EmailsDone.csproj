@@ -8,10 +8,16 @@
     <Authors>EmailsDone</Authors>
     <Company>EmailsDone</Company>
     <Description>Template-first transactional email SDK for EmailsDone.</Description>
-    <PackageTags>emailsdone;email;transactional-email;sdk</PackageTags>
+    <PackageTags>email;transactional-email;password-reset;verification;notifications;ses;firebase;sdk;dotnet</PackageTags>
     <PackageProjectUrl>https://emailsdone.dev/docs/libraries/dotnet/</PackageProjectUrl>
-    <RepositoryUrl>https://emailsdone.dev</RepositoryUrl>
+    <RepositoryUrl>https://github.com/emailsdone-dev/emailsdone-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReleaseNotes>Initial preview release. Template sending and basic recipient and quota details.</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright © EmailsDone</Copyright>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
@@ -19,5 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="" Link="README.md" />
+    <None Include="..\LICENSE" Pack="true" PackagePath="" Link="LICENSE" />
+    <None Include="..\logo.png" Pack="true" PackagePath="" Link="logo.png" />
   </ItemGroup>
 </Project>

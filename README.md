@@ -1,8 +1,10 @@
-# EmailsDone for .NET
+EmailsDone for .NET
 
-Template-first transactional email for developers who do not care about email.
+EmailsDone.dev — Production-ready app email for developers who do not want an email project.
 
-This SDK is generated from the EmailsDone OpenAPI contract.
+Add password resets, verification, notifications and billing emails without building templates, writing HTML or wiring email infrastructure.
+
+Emails. Done.
 
 ## Install
 
