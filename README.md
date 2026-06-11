@@ -25,35 +25,60 @@ Do not put this key in browser JavaScript, mobile apps, public frontend configur
 ```csharp
 using EmailsDone;
 
-var client = EmailsDoneClient.FromApiKey(
+var emailsDone = EmailsDoneClient.FromApiKey(
     Environment.GetEnvironmentVariable("EMAILSDONE_API_KEY")
 );
 
-await client.Send.Authentication.WelcomeAsync("user@example.com", actionButtonUrl: "https://app.example.com/action");
+await emailsDone.Authentication().Welcome("https://app.example.com/action").Send("user@example.com");
 ```
 
 Templates with required fields expose those fields as typed parameters:
 
 ```csharp
-await client.Send.Authentication.LoginCodeAsync(
-    "user@example.com",
-    code: "123456"
-);
+await emailsDone
+    .Authentication()
+    .LoginCode(
+        "123456"
+    )
+    .Send("user@example.com");
 ```
 
 Optional template fields and send controls use options objects:
 
 ```csharp
-await client.Send.Authentication.LoginCodeAsync(
-    "user@example.com",
-    code: "123456",
-    options: new LoginCodeOptions
-    {
-        FooterNote = "If you did not request this code, you can safely ignore this email.",
-        FromName = "Acme App",
-        IdempotencyKey = "email-user-123-v1"
-    }
-);
+await emailsDone
+    .Authentication()
+    .LoginCode(
+        new LoginCodeOptions
+        {
+            Code = "123456",
+            FooterNote = "If you did not request this code, you can safely ignore this email.",
+            FromName = "Acme App",
+            IdempotencyKey = "email-user-123-v1"
+        }
+    )
+    .Send("user@example.com");
+```
+
+## Recipient status
+
+```csharp
+var recipientStatus = await emailsDone
+    .Recipient("user@example.com")
+    .GetStatus();
+
+if (recipientStatus.Recipient?.Subscription?.Status != "subscribed")
+{
+    await emailsDone
+        .Recipient("user@example.com")
+        .Resubscribe();
+}
+```
+
+## Quota
+
+```csharp
+var quota = await emailsDone.GetQuota();
 ```
 
 ## Idempotency
@@ -61,24 +86,29 @@ await client.Send.Authentication.LoginCodeAsync(
 Use an idempotency key for password resets, billing emails, and other flows where your app or worker may retry the same send.
 
 ```csharp
-await client.Send.Authentication.PasswordResetAsync(
-    "user@example.com",
-    actionButtonUrl: resetUrl,
-    options: new PasswordResetOptions
-    {
-        IdempotencyKey = $"password-reset-{userId}-{tokenId}"
-    }
-);
+await emailsDone
+    .Billing()
+    .PaymentFailed(
+        new PaymentFailedOptions
+        {
+            ActionButtonUrl = billingUrl,
+            IdempotencyKey = $"payment-failed-{invoiceId}"
+        }
+    )
+    .Send("user@example.com");
 ```
 
 ## Fluent template groups
 
-The generated client mirrors EmailsDone template categories:
+The generated client mirrors EmailsDone template categories and recipient resource actions:
 
-- `client.Send.Authentication`
-- `client.Send.Billing`
-- `client.Send.Developer`
-- `client.Send.Notification`
-- `client.Send.Team`
+- `await emailsDone.GetQuota()`
+- `emailsDone.Recipient(email).GetStatus()`
+- `emailsDone.Recipient(email).Resubscribe()`
+- `emailsDone.Authentication()`
+- `emailsDone.Billing()`
+- `emailsDone.Developer()`
+- `emailsDone.Notification()`
+- `emailsDone.Team()`
 
 Each method sends a named EmailsDone template through `/v1/send`. 

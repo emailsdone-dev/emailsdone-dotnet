@@ -4,7 +4,7 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <PackageId>EmailsDone</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.1.3</Version>
     <Authors>EmailsDone</Authors>
     <Company>EmailsDone</Company>
     <Description>Template-first transactional email SDK for EmailsDone.</Description>
@@ -18,6 +18,6 @@
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" Pack="true" PackagePath="" />
+    <None Include="..\README.md" Pack="true" PackagePath="" Link="README.md" />
   </ItemGroup>
 </Project>
